@@ -1,0 +1,21 @@
+{
+  "name": "nft-phaser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html -p 8000 && cpx src/assets/**/* dist/assets",
+    "cp-assets": "cpx src/assets/**/* dist/assets"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cpx": "^1.5.0",
+    "phaser": "^3.55.2",
+    "rxjs": "^7.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
+}
