@@ -4,6 +4,7 @@
 
 import Phaser from 'phaser'
 import RoomScene from './scenes/room.scene'
+import SquareScene from './scenes/square.scene'
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -13,10 +14,10 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
         default: 'arcade',
         arcade: {
             gravity: { x: 0, y: 0 },
-            debug: true
+            // debug: true
         }
     },
-    scene: [RoomScene]
+    scene: [RoomScene, SquareScene]
 }
 
 export default new Phaser.Game(gameConfig)

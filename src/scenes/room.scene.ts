@@ -1,12 +1,13 @@
 import Phaser from 'phaser'
 import Player from '~/services/Player'
+import SquareScene from './square.scene'
 
-class RoomScene extends Phaser.Scene {
+export default class RoomScene extends Phaser.Scene {
 
     player!: Player
 
     constructor() {
-        super('room-scene')
+        super('roomScene')
     }
     preload() {
         //player sprites
@@ -17,6 +18,8 @@ class RoomScene extends Phaser.Scene {
         //map sprites
         this.load.image('tiles', '../assets/maps/tiles/icecream.png')
         this.load.tilemapTiledJSON('room', '../assets/maps/room.json')
+        //collider sprite
+        this.load.image('collider', '../assets/objects/collider.png')
     }
 
     create() {
@@ -30,17 +33,23 @@ class RoomScene extends Phaser.Scene {
         //Add Player
         const playerElement = this.physics.add.sprite(0, 0, 'player')
         this.player = new Player(this, playerElement)
+        //Add out collider  
+        const outCollider = this.physics.add.staticSprite(-30, 110, 'collider')
+        outCollider.setBodySize(64, 32).setAlpha(0)
         //Set collider
         walls.setCollisionByExclusion([-1])
         this.physics.add.collider(this.player.player, walls)
+        //Out collider
+        this.physics.add.collider(this.player.player, outCollider, () => {
+            this.scene.start('squareScene')
+        })
         //Set camera
         this.cameras.main.startFollow(this.player.player)
     }
 
     update(time: number, delta: number): void {
 
+
     }
 
 }
-
-export default RoomScene

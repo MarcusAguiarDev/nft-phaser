@@ -9,8 +9,8 @@ export default class Player extends CustomGamepad {
         super(scene)
         this.player = playerElement
         //Adjust body to correct collide
-        this.player.body.setSize(32,50)
-        this.player.body.setOffset(0,14)
+        this.player.body.setSize(32,20)
+        this.player.body.setOffset(0,44)
         this.createAnimations()
         Object.keys(this.walkHotkeys).forEach(index => {
             this.walkHotkeys[index].on('down', e => this.keyDownEventHandler(index, e))
