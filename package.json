@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "cpx": "^1.5.0",
+    "dom-components": "^0.1.0",
+    "jsx-dom": "^8.0.1-beta.5",
     "phaser": "^3.55.2",
     "rxjs": "^7.5.4"
   },

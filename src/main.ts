@@ -6,8 +6,18 @@ import Phaser from 'phaser'
 import RoomScene from './scenes/room.scene'
 import SquareScene from './scenes/square.scene'
 
+const scaleConfig: Phaser.Types.Core.ScaleConfig  = {
+    zoom: 4,
+    mode: Phaser.Scale.ScaleModes.FIT
+}
+
 const gameConfig: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
+    parent: 'game-container',
+    dom: {
+        createContainer: true
+    },
+    // scale: scaleConfig,
     width: 800,
     height: 600,
     physics: {

@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import Player from '~/services/Player'
-import SquareScene from './square.scene'
+
 
 export default class RoomScene extends Phaser.Scene {
 
@@ -48,7 +48,9 @@ export default class RoomScene extends Phaser.Scene {
     }
 
     update(time: number, delta: number): void {
-
+        
+        // this.player.chatBalloon.x = this.player.player.x + 20
+        // this.player.chatBalloon.y = this.player.player.y - 4
 
     }
 

@@ -13,3 +13,24 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.chat-input {
+    font-family: monospace;
+    padding: 8px;
+    font-size: 14px;
+    width: 40%;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    border: 3px solid #afafaf;
+    border-radius: 7px;
+}
+
+.chat-balloon {
+    max-width: 130px;
+    overflow: hidden;
+    border: 2px solid #afafaf;
+    font-family: monospace;
+    padding: 8px;
+    border-radius: 12px 12px 12px 0;
+    background-color: #fff;
+}

@@ -6,8 +6,8 @@ export default class CustomGamepad {
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
-        this.walkHotkeys = scene.input.keyboard.addKeys('W,D,S,A,UP,RIGHT,DOWN,LEFT') as KeyMap
-        this.actionHotkeys = scene.input.keyboard.addKeys('SPACE') as KeyMap
+        this.walkHotkeys = scene.input.keyboard.addKeys('W,D,S,A,UP,RIGHT,DOWN,LEFT', false) as KeyMap
+        this.actionHotkeys = scene.input.keyboard.addKeys('SPACE,ENTER', false) as KeyMap
     }
 }
 
