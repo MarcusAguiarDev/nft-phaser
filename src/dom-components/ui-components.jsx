@@ -22,26 +22,50 @@ export function QuickMenuItem({ id, icon, text }) {
 }
 
 export function InventoryMenu(items) {
+    console.log(items)
     return (
         <section class="inventory-menu">
-            {items.map(item => {
-                <InventoryMenuItem
-                    title={item.title}
-                    nftNumber={item.nftNumber}
-                    image={item.image} />
-            })}
+
+            <div class="inventory-menu-header feature-header">
+                <i class="fa fa-solid fa-box-open"></i>
+                Inventory
+
+                <div class="inventory-menu-actions">
+                    <div id="inventory-menu-close" class="icon-button close-button">
+                        <i class="fa fa-solid fa-close"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inventory-menu-body">
+                <div id="inventory-menu-previous" className="icon-button inventory-menu-previous">
+                    <i class="fa fa-solid fa-angle-left"></i>
+                </div>
+
+                <div class="inventory-menu-items">
+                    {items.map(item => {
+                        return <InventoryMenuItem
+                            title={item.title}
+                            nftNumber={item.nftId}
+                            imagePath={item.imagePath} />
+                    })}
+                </div>
+
+                <div id="inventory-menu-next" className="icon-button inventory-menu-next">
+                    <i class="fa fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+
         </section>
     )
 }
 
-export function InventoryMenuItem({ title, nftNumber, image }) {
+export function InventoryMenuItem({ title, nftNumber, imagePath }) {
     return (
         <div class="inventory-menu-item">
             <div class="inventory-menu-item__title">{title}</div>
             <div class="inventory-menu-item__nft">#{nftNumber}</div>
-            <div class="inventory-menu-item__icon">
-
-            </div>
+            <img class="inventory-menu-item__icon" style={`background-image: url("${imagePath}")`} />
         </div>
     )
 }

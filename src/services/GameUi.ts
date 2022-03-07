@@ -27,13 +27,12 @@ export default class GameUi {
         this.createQuickMenu()
     }
 
-    createInventoryMenu(items: Array<any>) {
+    createInventoryMenu(items: Array<InventoryItem>) {
         const inventoryMenuElement = this.scene.add.dom(0, 580, InventoryMenu(items))
             .setOrigin(0, 1)
             .setVisible(true)
             .setScrollFactor(0)
         const inventoryMenuDom = document.getElementById(INVENTORY_MENU_ID) as HTMLInputElement
-
     }
 
     createQuickMenu() {
@@ -56,8 +55,20 @@ export default class GameUi {
         }
     }
     
-    getAccountItems(): Array<any>{
+    getAccountItems(): Array<InventoryItem>{
         //TODO  
-        return []
+        return mockIventoryItems
     }
 }
+
+interface InventoryItem {
+    title: string,
+    nftId: string,
+    imagePath: string
+}
+
+const mockIventoryItems = [
+    {title: "Renan", nftId: "2424", imagePath: "assets/objects/renan.jpg"},
+    {title: "Marcus", nftId: "1234", imagePath: "assets/objects/marcus.jpg"},
+    {title: "Bolsonaro", nftId: "1717", imagePath: "assets/objects/bolsonaro.jpg"},
+]
