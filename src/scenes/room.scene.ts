@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import GameUi from '~/services/GameUi'
 import Player from '~/services/Player'
 
 
@@ -45,6 +46,8 @@ export default class RoomScene extends Phaser.Scene {
         })
         //Set camera
         this.cameras.main.startFollow(this.player.player)
+        //Create Game UI
+        const gameUi = new GameUi(this)
     }
 
     update(time: number, delta: number): void {

@@ -14,6 +14,7 @@ body {
     align-items: center;
 }
 
+/* Chat components */
 .chat-input {
     font-family: monospace;
     padding: 8px;
@@ -24,7 +25,6 @@ body {
     border: 3px solid #afafaf;
     border-radius: 7px;
 }
-
 .chat-balloon {
     max-width: 130px;
     overflow: hidden;
@@ -34,3 +34,34 @@ body {
     border-radius: 12px 12px 12px 0;
     background-color: #fff;
 }
+/* UI MENU */
+.quick-menu {
+    display: flex !important;
+    gap: 4px;
+}
+.quick-menu-item {
+    color: #fff;
+    border: 2px solid #afafaf;
+    border-radius: 7px;
+    background: linear-gradient(rgba(20, 158, 196, 0.8),rgba(142, 194, 217, 0.8));
+    padding: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 32px;
+    line-height: 32px;
+    position: relative;
+}
+.quick-menu-item:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.quick-menu-item:hover::before {
+    content: attr(data-content);
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: monospace;
+    top: -36px;
+    right: 0;
+}
+
