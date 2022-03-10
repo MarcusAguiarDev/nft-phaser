@@ -3,8 +3,8 @@
  */
 
 import Phaser from 'phaser'
-import RoomScene from './scenes/room.scene'
-import SquareScene from './scenes/square.scene'
+import RoomScene from './scenes/RoomScene'
+import SquareScene from './scenes/SquareScene'
 
 const scaleConfig: Phaser.Types.Core.ScaleConfig  = {
     zoom: 4,
@@ -24,7 +24,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
         default: 'arcade',
         arcade: {
             gravity: { x: 0, y: 0 },
-            // debug: true
+            debug: true
         }
     },
     scene: [RoomScene, SquareScene]

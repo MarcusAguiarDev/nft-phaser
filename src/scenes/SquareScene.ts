@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import Player from '~/services/Player'
+import Player from '~/game-objects/Player'
 
 export default class SquareScene extends Phaser.Scene {
 

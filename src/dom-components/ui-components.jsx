@@ -21,10 +21,9 @@ export function QuickMenuItem({ id, icon, text }) {
     )
 }
 
-export function InventoryMenu(items) {
-    console.log(items)
+export function InventoryMenu({context, items, inventoryItemClick}) {
     return (
-        <section class="inventory-menu">
+        <section id="inventory-menu" class="inventory-menu">
 
             <div class="inventory-menu-header feature-header">
                 <i class="fa fa-solid fa-box-open"></i>
@@ -45,9 +44,11 @@ export function InventoryMenu(items) {
                 <div class="inventory-menu-items">
                     {items.map(item => {
                         return <InventoryMenuItem
+                            id={item.id}
                             title={item.title}
                             nftNumber={item.nftId}
-                            imagePath={item.imagePath} />
+                            imagePath={item.imagePath}
+                            clickHandler={inventoryItemClick.bind(context)}/>
                     })}
                 </div>
 
@@ -60,9 +61,9 @@ export function InventoryMenu(items) {
     )
 }
 
-export function InventoryMenuItem({ title, nftNumber, imagePath }) {
+export function InventoryMenuItem({ id, title, nftNumber, imagePath, clickHandler }) {
     return (
-        <div class="inventory-menu-item">
+        <div class="inventory-menu-item" onclick={clickHandler.bind(null, id)}>
             <div class="inventory-menu-item__title">{title}</div>
             <div class="inventory-menu-item__nft">#{nftNumber}</div>
             <img class="inventory-menu-item__icon" style={`background-image: url("${imagePath}")`} />

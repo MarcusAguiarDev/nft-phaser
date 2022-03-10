@@ -1,5 +1,9 @@
+/**
+ *  Player class
+ */
+
 import { chatBalloon, chatInput } from "~/dom-components/chat-components";
-import CustomGamepad from "./Gamepad";
+import CustomGamepad from "../services/Gamepad";
 
 const PLAYER_SPEED = 200
 const CHAT_INPUT_ID = 'chat-input'
@@ -21,8 +25,8 @@ export default class Player extends CustomGamepad {
         this.player = playerElement
         this.focus = Focus.GAME
         //Adjust body to correct collide
-        this.player.body.setSize(32, 20)
-        this.player.body.setOffset(0, 44)
+        // this.player.body.setSize(32, 20)
+        // this.player.body.setOffset(0, 44)
         this.createAnimations()
         //walkHotkeys event handlers
         Object.keys(this.walkHotkeys).forEach(index => {
