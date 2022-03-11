@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import MiningRig from '~/game-objects/MiningRig'
-import GameUi from '~/services/GameUi'
 import Player from '~/game-objects/Player'
+import GameUi from '~/services/GameUi'
 
 
 export default class RoomScene extends Phaser.Scene {
@@ -36,30 +36,28 @@ export default class RoomScene extends Phaser.Scene {
         const walls = map.createLayer('walls', tileset, mapX, mapY)
         //Add Mining rigs
         const rig = new MiningRig(this, 2 * tileWidth / 2, 0 * tileHeight / 2, 'rigs', 3)
-        // const rig2 = new MiningRig(this, 5 * tileWidth/2, 0 * tileHeight/2, 'rigs', 3)
+
         //Add Player
-        const playerElement = this.physics.add.sprite(0, 0, 'player')
-        this.player = new Player(this, playerElement)
+        this.player = new Player(this, 0, 0, 'player', 'Marcus')
+
         //Add out collider  
         const outCollider = this.physics.add.staticSprite(0, 6 * tileHeight + 16, 'collider')
         outCollider.setBodySize(3 * tileWidth, 1 * tileHeight).setAlpha(0)
-        this.physics.add.collider(this.player.player, outCollider, () => {
+        this.physics.add.collider(this.player, outCollider, () => {
             this.scene.start('squareScene')
         })
         //Set colliders
         walls.setCollisionByExclusion([-1])
-        this.physics.add.collider(this.player.player, [walls, rig.container])
+        this.physics.add.collider([this.player, this.player.attachedContainer], [walls, rig.container])
         //Set camera
-        this.cameras.main.startFollow(this.player.player)
+        this.cameras.main.startFollow(this.player)
         //Create Game UI
         const gameUi = new GameUi(this)
-        //collide tests
-        console.log(ground.getLocalTransformMatrix())
-
     }
 
     update(time: number, delta: number): void {
 
+        this.player.update()
     }
 
 }

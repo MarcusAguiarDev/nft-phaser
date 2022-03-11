@@ -6,10 +6,6 @@ import Phaser from 'phaser'
 import RoomScene from './scenes/RoomScene'
 import SquareScene from './scenes/SquareScene'
 
-const scaleConfig: Phaser.Types.Core.ScaleConfig  = {
-    zoom: 4,
-    mode: Phaser.Scale.ScaleModes.FIT
-}
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -17,16 +13,17 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     dom: {
         createContainer: true
     },
-    // scale: scaleConfig,
+    pixelArt: true,
     width: 800,
     height: 600,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { x: 0, y: 0 },
-            debug: true
+            debug: false
         }
     },
+    autoFocus: true,
     scene: [RoomScene, SquareScene]
 }
 

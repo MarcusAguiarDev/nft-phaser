@@ -35,8 +35,8 @@ export default class SquareScene extends Phaser.Scene {
         const landscapeCollider = map.createLayer('landscape-collider', tileset)
         const bridge = map.createLayer('bridge', tileset)
         //Add Player
-        const playerElement = this.physics.add.sprite(400, 400, 'player')
-        this.player = new Player(this, playerElement)
+        this.player = new Player(this, 200,200, 'player', 'Marcus')
+
         //Add top layer
         const top = map.createLayer('top', tileset).setZ(99)
         //Collider objects
@@ -46,15 +46,13 @@ export default class SquareScene extends Phaser.Scene {
         lakeCollider2.body.setCircle(74)
         //Set collider
         landscapeCollider.setCollisionByExclusion([-1])
-        this.physics.add.collider(this.player.player, lakeCollider1)
-        this.physics.add.collider(this.player.player, lakeCollider2)
-        this.physics.add.collider(this.player.player, landscapeCollider)
+        this.physics.add.collider([this.player, this.player.attachedContainer], [lakeCollider1, lakeCollider2, landscapeCollider])
         //Set camera
-        this.cameras.main.startFollow(this.player.player)
+        this.cameras.main.startFollow(this.player)
     }
 
     update(time: number, delta: number): void {
-
+        this.player.update()
     }
 
 }
