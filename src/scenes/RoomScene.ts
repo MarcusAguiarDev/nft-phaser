@@ -1,19 +1,23 @@
 import Phaser from 'phaser'
+import DraggableSprite from '~/game-objects/DraggableSprite'
 import MiningRig from '~/game-objects/MiningRig'
 import Player from '~/game-objects/Player'
 import GameUi from '~/services/GameUi'
+import { MapObjectsState } from '~/services/MapObjectsState'
 
 
 export default class RoomScene extends Phaser.Scene {
 
     player!: Player
+    mapObjectsState!: MapObjectsState
+
 
     constructor() {
         super('roomScene')
     }
     preload() {
         this.load.spritesheet('player', '../assets/characters/player1.png', { frameWidth: 32, frameHeight: 64 })
-        this.load.spritesheet('rigs', '../assets/objects/laptops.png', { frameWidth: 32, frameHeight: 32 })
+        this.load.spritesheet('laptops', '../assets/objects/laptops.png', { frameWidth: 32, frameHeight: 32 })
         this.load.image('tiles', '../assets/maps/tiles/icecream.png')
         this.load.tilemapTiledJSON('room', '../assets/maps/room.json')
         this.load.image('collider', '../assets/objects/collider.png')
@@ -34,8 +38,13 @@ export default class RoomScene extends Phaser.Scene {
         const mapY = (-mapTilerHeight * tileHeight / 2)
         const ground = map.createLayer('ground', tileset, mapX, mapY)
         const walls = map.createLayer('walls', tileset, mapX, mapY)
-        //Add Mining rigs
-        const rig = new MiningRig(this, 2 * tileWidth / 2, 0 * tileHeight / 2, 'rigs', 3)
+
+        //create MapObjects state
+        const groundLayer = map.getLayer('ground')
+        this.mapObjectsState = new MapObjectsState(groundLayer)
+
+        //add objects
+        const deskOBject = new DraggableSprite(this, this.mapObjectsState, 10, 1, 'laptops', 0)
 
         //Add Player
         this.player = new Player(this, 0, 0, 'player', 'Marcus')
@@ -48,7 +57,7 @@ export default class RoomScene extends Phaser.Scene {
         })
         //Set colliders
         walls.setCollisionByExclusion([-1])
-        this.physics.add.collider([this.player, this.player.attachedContainer], [walls, rig.container])
+        this.physics.add.collider([this.player, this.player.attachedContainer], [walls, deskOBject])
         //Set camera
         this.cameras.main.startFollow(this.player)
         //Create Game UI
