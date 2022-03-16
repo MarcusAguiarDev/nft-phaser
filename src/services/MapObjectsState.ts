@@ -38,8 +38,8 @@ export class MapObjectsState {
 
     insertObject(positions: Array<MatrixPosition>, object: any): boolean {
         //validate positions
-        console.log(positions)
-        console.log(this.matrix)
+        // console.log(positions)
+        // console.log(this.matrix)
         for (let i = 0; i < positions.length; i++) {
             const position = positions[i]
             if (position.line < 0 || position.column < 0 || this.matrix.length <= position.line ||

@@ -1,5 +1,9 @@
 import Phaser from 'phaser'
+
+import DraggableContainer, { DraggableContainedSprites } from '~/game-objects/DraggableContainer'
 import DraggableSprite from '~/game-objects/DraggableSprite'
+
+
 import MiningRig from '~/game-objects/MiningRig'
 import Player from '~/game-objects/Player'
 import GameUi from '~/services/GameUi'
@@ -44,7 +48,27 @@ export default class RoomScene extends Phaser.Scene {
         this.mapObjectsState = new MapObjectsState(groundLayer)
 
         //add objects
-        const deskOBject = new DraggableSprite(this, this.mapObjectsState, 10, 1, 'laptops', 0)
+        const containedSprites: DraggableContainedSprites[] = [
+            {
+                line: 1,
+                column: 1,
+                sprite: new DraggableSprite(this, 'laptops', 0),
+                z: 1
+            },
+            {
+                line: 1,
+                column: 1,
+                sprite: new DraggableSprite(this, 'laptops', 4),
+                z: 2
+            },
+            {
+                line: 2,
+                column: 1,
+                sprite: new DraggableSprite(this, 'laptops', 9),
+                z: 1
+            },
+        ]
+        const dragContainer = new DraggableContainer(this, this.mapObjectsState, 8, 8, containedSprites)
 
         //Add Player
         this.player = new Player(this, 0, 0, 'player', 'Marcus')
@@ -57,7 +81,7 @@ export default class RoomScene extends Phaser.Scene {
         })
         //Set colliders
         walls.setCollisionByExclusion([-1])
-        this.physics.add.collider([this.player, this.player.attachedContainer], [walls, deskOBject])
+        this.physics.add.collider([this.player, this.player.attachedContainer], [walls])
         //Set camera
         this.cameras.main.startFollow(this.player)
         //Create Game UI
