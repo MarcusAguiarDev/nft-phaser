@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-import DraggableContainer, { DraggableContainedSprites } from '~/game-objects/DraggableContainer'
+import DraggableContainer, { SpriteContainer } from '~/game-objects/DraggableContainer'
 import DraggableSprite from '~/game-objects/DraggableSprite'
 
 
@@ -48,27 +48,43 @@ export default class RoomScene extends Phaser.Scene {
         this.mapObjectsState = new MapObjectsState(groundLayer)
 
         //add objects
-        const containedSprites: DraggableContainedSprites[] = [
+        const spriteContainers: SpriteContainer[] = [
             {
-                line: 1,
-                column: 1,
-                sprite: new DraggableSprite(this, 'laptops', 0),
-                z: 1
+                line: 8,
+                column: 5,
+                collide: true,
+                depth: 0,
+                sprites: [
+                    {
+                        line: 1,
+                        column: 1,
+                        sprite: new DraggableSprite(this, 'laptops', 9),
+                        z: 1
+                    }
+                ]
             },
             {
-                line: 1,
-                column: 1,
-                sprite: new DraggableSprite(this, 'laptops', 4),
-                z: 2
-            },
-            {
-                line: 2,
-                column: 1,
-                sprite: new DraggableSprite(this, 'laptops', 9),
-                z: 1
+                line: 7,
+                column: 5,
+                collide: false,
+                depth: 3,
+                sprites: [
+                    {
+                        line: 1,
+                        column: 1,
+                        sprite: new DraggableSprite(this, 'laptops', 0),
+                        z: 1
+                    },
+                    {
+                        line: 1,
+                        column: 1,
+                        sprite: new DraggableSprite(this, 'laptops', 5),
+                        z: 2
+                    },
+                ]
             },
         ]
-        const dragContainer = new DraggableContainer(this, this.mapObjectsState, 8, 8, containedSprites)
+        const dragContainer = new DraggableContainer(this, this.mapObjectsState, spriteContainers)
 
         //Add Player
         this.player = new Player(this, 0, 0, 'player', 'Marcus')
@@ -81,7 +97,7 @@ export default class RoomScene extends Phaser.Scene {
         })
         //Set colliders
         walls.setCollisionByExclusion([-1])
-        this.physics.add.collider([this.player, this.player.attachedContainer], [walls])
+        this.physics.add.collider([this.player, this.player.attachedContainer], [walls, dragContainer])
         //Set camera
         this.cameras.main.startFollow(this.player)
         //Create Game UI
