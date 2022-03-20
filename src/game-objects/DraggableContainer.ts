@@ -246,10 +246,6 @@ export default class DraggableContainer extends Phaser.GameObjects.Container {
         this.scene.input.on('drag', this.onDragHandler.bind(this))
         this.scene.input.on('dragstart', this.onDragStart.bind(this))
     }
-
-    setCollision(collisionObjects, callbackFunction?) {
-        this.scene.physics.add.collider(this, collisionObjects, callbackFunction)
-    }
 }
 
 export interface SpriteContainer {

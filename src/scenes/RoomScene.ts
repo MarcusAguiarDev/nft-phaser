@@ -6,6 +6,7 @@ import DraggableSprite from '~/game-objects/DraggableSprite'
 
 import MiningRig from '~/game-objects/MiningRig'
 import Player from '~/game-objects/Player'
+import RigContainer from '~/game-objects/RigContainer'
 import GameUi from '~/services/GameUi'
 import { MapObjectsState } from '~/services/MapObjectsState'
 
@@ -84,10 +85,13 @@ export default class RoomScene extends Phaser.Scene {
                 ]
             },
         ]
-        const dragContainer = new DraggableContainer(this, this.mapObjectsState, spriteContainers)
 
         //Add Player
         this.player = new Player(this, 0, 0, 'player', 'Marcus')
+
+        const dragContainer = new RigContainer(this, this.mapObjectsState, spriteContainers)
+        dragContainer.setCollision([this.player, this.player.attachedContainer])
+
 
         //Add out collider  
         const outCollider = this.physics.add.staticSprite(0, 6 * tileHeight + 16, 'collider')
@@ -97,7 +101,7 @@ export default class RoomScene extends Phaser.Scene {
         })
         //Set colliders
         walls.setCollisionByExclusion([-1])
-        this.physics.add.collider([this.player, this.player.attachedContainer], [walls, dragContainer])
+        this.physics.add.collider([this.player, this.player.attachedContainer], [walls])
         //Set camera
         this.cameras.main.startFollow(this.player)
         //Create Game UI
